@@ -1,4 +1,5 @@
 require("./libs/Actor")
+require("./libs/Banter")
 
 local stage = {w = 1280, h = 720}
 love.window.setMode(stage.w, stage.h)
@@ -11,13 +12,14 @@ local ploe = Actor.new {
 	y = 0,
 	w = 720,
 	h = 611, 	
-} 
+}
 
+-- Draw 30 frames a second
 local start = love.timer.getTime()
 local JIFFY = 1/30
 function love.draw()
---    love.graphics.print("Hello World", 400, 300)
 	Actor.draw()
+	Banter.draw()
 	if love.timer.getTime() <= start + JIFFY then love.timer.sleep(start + JIFFY - love.timer.getTime()) end
 	start = love.timer.getTime()
 end

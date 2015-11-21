@@ -1,5 +1,5 @@
-local actors = {}
 Actor = {}
+local actors = {}
 
 -- create a new instance of the Actor class
 function Actor.new(a)
