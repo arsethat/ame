@@ -4,6 +4,9 @@ require("./libs/Banter")
 local stage = {w = 1280, h = 720}
 love.window.setMode(stage.w, stage.h)
 love.window.setTitle("ame: visual novel engine")
+icon = love.image.newImageData('res/icon/arsethat.png')
+
+love.window.setIcon(icon)
 
 local ploe = Actor.new {
 	tag = 'ploe',
