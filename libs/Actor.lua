@@ -26,6 +26,8 @@ function Actor.update()
 	for k in pairs(actors) do
 		if actors[k].update then actors[k]:update() end
 	end
+
+	return "LIVE"
 end
 
 -- call the draw function on every Actor
@@ -34,3 +36,9 @@ function Actor.draw()
 		if actors[k].draw then actors[k]:draw() end
 	end
 end
+
+Crew.new {
+	draw = Actor.draw,
+	tag = 'Actor',
+	update = Actor.update,
+}

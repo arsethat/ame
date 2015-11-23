@@ -1,3 +1,4 @@
+require("./libs/Crew")
 require("./libs/Actor")
 require("./libs/Banter")
 
@@ -21,8 +22,7 @@ local ploe = Actor.new {
 local start = love.timer.getTime()
 local JIFFY = 1/30
 function love.draw()
-	Actor.draw()
-	Banter.draw()
+	Crew.draw()
 	if love.timer.getTime() <= start + JIFFY then love.timer.sleep(start + JIFFY - love.timer.getTime()) end
 	start = love.timer.getTime()
 end
