@@ -11,8 +11,19 @@ function Actor.new(a)
 	if (not a.w) or (not a.h) then return nil end
 	local quad = love.graphics.newQuad(0, 0, a.w, a.h, costume:getWidth(), costume:getHeight())
 
+	
+	local clip = 0
+	function a:jumpClip(c)
+		clip = c
+	end
+
+	local reel = 0
+	function a:jumpReel(r)
+		reel = r
+	end
+
 	function a:draw()
-		quad:setViewport(0, 0, a.w, a.h)
+		quad:setViewport(clip*a.w, reel*a.h, a.w, a.h)
 		if type(self.animate) == "function" then self.animate = self:animate() end
 		love.graphics.draw(costume, quad, self.x, self.y)
 	end

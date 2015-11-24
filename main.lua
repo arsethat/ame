@@ -42,11 +42,11 @@ end
 
 local ploe = Actor.new {
 	tag = 'ploe',
-	costume = 'ploe-normal',
+	costume = 'ploe',
 	x = 0,
 	y = 0,
-	w = 720,
-	h = 611, 	
+	w = 540,
+	h = 720, 	
 }
 
 -- test dialogue
@@ -71,7 +71,17 @@ end
 -- Draw 30 frames a second
 local start = love.timer.getTime()
 local JIFFY = 1/30
+local counter = 0
+local clip = 0
 function love.update()
+	counter = counter + 1
+	if counter == 10 then
+		clip =  clip + 1
+		if clip > 2 then clip = 0 end
+		ploe:jumpClip(clip)
+		counter = 0
+	end
+
 	stage.frame = stage.frame + 1
 	Crew.update()
 end
