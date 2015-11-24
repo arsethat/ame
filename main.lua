@@ -1,7 +1,7 @@
 require("./libs/Crew")
+require("./libs/Cue")
 require("./libs/Actor")
 require("./libs/Banter")
-require("./libs/Cue")
 
 local stage = Cue.tmp("Stage", {
 	w = 1280,
@@ -48,6 +48,12 @@ local ploe = Actor.new {
 	w = 720,
 	h = 611, 	
 }
+
+-- test dialogue
+Banter.push("hello, world\nmy name is myke\ncheck this shit out\nphwoar...\none more time!")
+Banter.push("another one")
+Banter.push("wahey!")
+Banter.roll()
 
 local mouse = Cue.tmp("Mouse", {})
 function love.mousepressed(x, y, b)

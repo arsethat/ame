@@ -1,8 +1,8 @@
 Cue = {}
-local cues = {signal = {}, persist = {}}
+local cues = {tmp = {}, persist = {}}
 
 function Cue.tmp(tag, c)
-	cues.signal[tag] = c
+	cues.tmp[tag] = c
 	return c
 end
 

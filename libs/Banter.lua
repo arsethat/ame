@@ -15,23 +15,66 @@ local settings = {
 	SLOW = 0.1, 
 }
 
+-- add a new Banter to the queue
 local queue = {}
 function Banter.push(m)
 	table.insert(queue, m)
 end
 
--- draw dat Banter 
-local msg = "hello, world\nmy name is myke\ncheck this shit out\nphwoar...\none more time!"
-local last = 0 
-function Banter.draw()
+-- load the next Banter to go
+local alive = false 
+local answered = false
+local last = 0
+local len = 0
+local msg = ""
+local function shift()
+	msg = queue[1]
+	table.remove(queue, 1)
+
+	if msg then
+		last = 0
+		len = msg:len()	
+	else  
+		alive = Cue.tmp("Banter", false)
+		answered = false
+	end
+end
+
+-- initiates the Banter, the dialogue
+function Banter.roll()
+	shift()
+	alive = Cue.tmp("Banter", true)	
+end
+
+-- progress the state of the Banter box on screen
+local function update()
+	if not alive then return "LIVE" end
+
+	local mouse = Cue.get("Mouse")
+	
 	last = last + settings[speed]
-	local len = msg:len()
 	if last > len then last = len end
-	love.graphics.print(msg:sub(0, math.floor(last)), 0, 410)
+
+	-- if the button was pressed this frame and we didn't pick up
+	if mouse.l and (mouse.l ~= answered) then
+		answered = mouse.l
+		if (last == len) then 
+			shift()
+		else last = len end
+	end
+
+
 	return "LIVE"
+end
+ 
+local function draw()
+	if alive then
+		love.graphics.print(msg:sub(0, math.floor(last)), 0, 410)
+	end
 end
 
 Crew.new {
-	draw = Banter.draw,
+	draw = draw,
 	tag = 'Banter',
+	update = update,
 }
