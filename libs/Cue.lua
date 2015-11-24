@@ -1,14 +1,16 @@
 Cue = {}
 local cues = {signal = {}, persist = {}}
 
-function Cue.signal(tag, struct)
-	cues.signal[tag] = struct
+function Cue.tmp(tag, c)
+	cues.signal[tag] = c
+	return c
 end
 
-function Cue.persist(tag, struct)
-	cues.persist[tag] = struct
+function Cue.persist(tag, c)
+	cues.persist[tag] = c
+	return c
 end
 
-function Cue.exists(tag)
-	return cue.signal[tag] or cue.persist[tag]
+function Cue.get(tag)
+	return cues.tmp[tag] or cues.persist[tag]
 end
